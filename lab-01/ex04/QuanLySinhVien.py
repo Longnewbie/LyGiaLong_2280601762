@@ -6,7 +6,7 @@ class QuanLySinhVien:
     def generateID(self):
         maxId = 1
         if (self.soLuongSinhVien() > 0):
-            maxId.self.listSinhVien[0]._id
+            maxId = self.listSinhVien[0]._id
             for sv in self.listSinhVien:
                 if (maxId < sv._id):
                     maxId = sv._id
@@ -18,10 +18,10 @@ class QuanLySinhVien:
     
     def nhapSinhVien(self):
         svId = self.generateID()
-        name = input("Nhập tên sinh viên: ")
-        sex = input("Nhập giới tính sinh viên: ")
-        major = input("Nhập chuyên ngành của sinh viên: ")
-        diemTB = float(input("Nhập điểm của sinh viên: "))
+        name = input("Nhap ten sinh vien: ")
+        sex = input("Nhap gioi tinh sinh vien: ")
+        major = input("Nhap chuyen nganh cua sinh vien: ")
+        diemTB = float(input("Nhap diem cua sinh vien: "))
         sv = SinhVien(svId, name, sex, major, diemTB)
         self.xepLoaiHocLuc(sv)
         self.listSinhVien.append(sv)
@@ -29,18 +29,17 @@ class QuanLySinhVien:
     def updateSinhVien(self, ID):
         sv:SinhVien = self.findByID(ID)
         if (sv != None):
-            name = input("Nhập tên sinh viên: ")
-            sex = input("Nhập giới tính sinh viên: ")
-            major = input("Nhập tên sinh viên: ")
-            name = int(input("Nhập chuyên ngành của sinh viên: "))
-            diemTB = float(input("Nhập điểm của sinh viên: "))
+            name = input("Nhap ten cua sinh vien: ")
+            sex = input("Nhap gioi tinh cua sinh vien: ")
+            major = input("Nhap chuyen nganh cua sinh vien: ")
+            diemTB = float(input("Nhap diem cua sinh vien: "))
             sv._name = name
             sv._sex = sex
             sv._major = major
             sv._diemTB = diemTB
             self.xepLoaiHocLuc(sv)
         else:
-            print("Sinh viên có ID = {} Không tồn tại.".format(ID))
+            print("Sinh vien co ID = {} Khong ton tai.".format(ID))
 
     def sortByID(self):
         self.listSinhVien.sort(key = lambda x: x._id, reverse=False)
@@ -82,4 +81,13 @@ class QuanLySinhVien:
             sv._hocLuc = "Kha"
         elif (sv._diemTB >= 5):
             sv._hocLuc = "Trung Binh"
-        else sv._hocLuc = "Yeu"
+        else: sv._hocLuc = "Yeu"
+
+    def showSinhVien(self, listSV):
+        print("{:<8} {:<18} {:<8} {:<8} {:<8} {:<8}".format("ID", "Name", "Sex", "Major", "Diem TB", "Hoc Luc"))
+        for sv in listSV:
+            print("{:<8} {:<18} {:<8} {:<8} {:<8} {:<8} ".format(sv._id, sv._name, sv._sex, sv._major, sv._diemTB, sv._hocLuc))
+        print("\n")
+
+    def getListSinhVien(self):
+        return self.listSinhVien
